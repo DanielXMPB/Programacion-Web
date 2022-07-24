@@ -178,10 +178,10 @@ public class Libro implements InterfaceLibro {
     public boolean actualizarLibro() {
         boolean exito = false;
         String sql = "UPDATE Libro SET nombre ='" + this.nombre + "'"
-                + ", autor =" + this.autor
-                + "categoria=" + this.id_categoria
-                + "id_editorial=" + this.id_ediorial
-                + "fecha_publicacion='" + this.fechapublicacion + "',paginas=" + this.Paginas + ",descripcion='" + this.descripcion + "'"
+                + ",autor =" + this.autor
+                + ",categoria=" + this.id_categoria
+                + ",id_editorial=" + this.id_ediorial
+                + ",fecha_publicacion='" + this.fechapublicacion + "',paginas=" + this.Paginas + ",descripcion='" + this.descripcion + "'"
                 + "WHERE Isbn='" + this.isbn + "';";
         ConexionBD conexion = new ConexionBD();
         if (conexion.setAutoCommitBD(false)) {
