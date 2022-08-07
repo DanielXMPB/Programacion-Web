@@ -37,6 +37,10 @@ public class Libro implements InterfaceLibro {
         this.descripcion = descripcion;
     }
 
+    public Libro(String isbn) {
+        this.isbn = isbn;
+    }
+
     public Libro() {
     }
 
@@ -178,7 +182,7 @@ public class Libro implements InterfaceLibro {
     public boolean actualizarLibro() {
         boolean exito = false;
         String sql = "UPDATE Libro SET nombre ='" + this.nombre + "'"
-                + ",autor =" + this.autor
+                + ",autor =" + this.id_autor
                 + ",categoria=" + this.id_categoria
                 + ",id_editorial=" + this.id_ediorial
                 + ",fecha_publicacion='" + this.fechapublicacion + "',paginas=" + this.Paginas + ",descripcion='" + this.descripcion + "'"
@@ -237,18 +241,18 @@ public class Libro implements InterfaceLibro {
                 l = new Libro();
                 l.setIsbn(rs.getString("isbn"));
                 l.setNombre(rs.getString("nombre"));
-                l.setId_autor(rs.getInt(id_autor));
-                l.setId_categoria(rs.getInt(id_categoria));
-                l.setId_ediorial(rs.getInt(id_ediorial));
-                l.setFechapublicacion(rs.getString("fechapublicacion"));
-                l.setPaginas(rs.getInt(Paginas));
+                l.setId_autor(rs.getInt("autor"));
+                l.setId_categoria(rs.getInt("categoria"));
+                l.setId_ediorial(rs.getInt("id_editorial"));
+                l.setFechapublicacion(rs.getString("fecha_publicacion"));
+                l.setPaginas(rs.getInt("paginas"));
                 l.setDescripcion(rs.getString("descripcion"));
-                Categoria c = new Categoria(l.getId_categoria());
-                l.setCategoria(c.getCategoria());
-                Editorial e = new Editorial();
-                l.setEditorial(e.getEditorial());
-                Autor a = new Autor();
-                l.setAutor(a.getAutor());
+                //Categoria c = new Categoria(l.getId_categoria());
+                //l.setCategoria(c.getCategoria());
+                //Editorial e = new Editorial();
+                //l.setEditorial(e.getEditorial());
+                //Autor a = new Autor();
+                //l.setAutor(a.getAutor());
                 listaA.add(l);
             }
         } catch (SQLException ex) {

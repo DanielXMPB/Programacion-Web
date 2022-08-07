@@ -86,8 +86,7 @@ public class Categoria implements InterfaceCategoria{
     @Override
     public boolean eliminarCategoria() {
         boolean exito = false;
-        String sql = "DELETE FROM categoria"
-                + "WHERE id_categoria=" + this.id_categoria + ";";
+        String sql = "DELETE FROM categoria WHERE id_categoria=" + this.id_categoria + ";";
         ConexionBD conexion = new ConexionBD();
         if (conexion.setAutoCommitBD(false)) {
             if (conexion.actualizarBD(sql)) {
@@ -108,9 +107,9 @@ public class Categoria implements InterfaceCategoria{
     @Override
     public boolean actualizarCategoria() {
         boolean exito = false;
-        String sql = "UPDATE categoria"
-                + "SET nombre='" + this.nombre + "', descripcion='" + this.descripcion + "'"
-                + "WHERE id_categoria=" + this.id_categoria + ";";
+        String sql = "UPDATE categoria\n" +
+                "SET nombre='"+this.nombre+"', descripcion='"+this.descripcion+"'\n" +
+                "WHERE id_categoria="+this.id_categoria+";";
         ConexionBD conexion = new ConexionBD();
         if (conexion.setAutoCommitBD(false)) {
             if (conexion.actualizarBD(sql)) {

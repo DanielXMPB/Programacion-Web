@@ -179,6 +179,7 @@ public class Autor implements InterfaceAutor{
         ResultSet rs = conexion.consultarBD(sql);
         
         try {
+            Autor a;
             if (rs.next()) {
                 this.id_autor=rs.getInt("id_autor");
                 this.nombre=rs.getString("nombre");
@@ -195,7 +196,7 @@ public class Autor implements InterfaceAutor{
     
     @Override
     public Autor searchAutor(){
-        String sql = "SELECT id_autor,nombre,alias,nacionalidad FROM autor WHERE nombre like '%"+this.nombre+"%'";
+        String sql = "SELECT * FROM autor WHERE nombre like '%"+this.nombre+"%'";
         ConexionBD conexion = new ConexionBD();
         
         ResultSet rs = conexion.consultarBD(sql);

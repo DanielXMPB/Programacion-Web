@@ -21,7 +21,8 @@
         "guardar",
         "eliminar",
         "actualizar",
-        "listar"	
+        "listar",
+        "buscar"
     });
 
     String proceso = "" + request.getParameter("proceso");
@@ -37,24 +38,24 @@
             //Solicitud de parámetros enviados desde el frontned
             //, uso de request.getParameter("nombre parametro")
             // creación de objeto y llamado a método guardar 
-            String id_autor=request.getParameter("id_autor");
-            String nombre=request.getParameter("nombre");
-            String alias=request.getParameter("alias");
-            String nacionalidad=request.getParameter("nacionalidad");
+            String id_autor = request.getParameter("id_autor");
+            String nombre = request.getParameter("nombre");
+            String alias = request.getParameter("alias");
+            String nacionalidad = request.getParameter("nacionalidad");
             Autor a = new Autor(Integer.parseInt(id_autor), nombre, alias, nacionalidad);
 
-            if (a.guardarAutor()) { 
+            if (a.guardarAutor()) {
                 respuesta += "\"" + proceso + "\": true";
             } else {
                 respuesta += "\"" + proceso + "\": false";
             }
 
         } else if (proceso.equals("eliminar")) {
-        //Solicitud de parámetros enviados desde el frontned
+            //Solicitud de parámetros enviados desde el frontned
             //, uso de request.getParameter("nombre parametro")
             //creación de objeto y llamado a método eliminar
-            
-            String id_autor=request.getParameter("id_autor");        
+
+            String id_autor = request.getParameter("id_autor");
             Autor a = new Autor(Integer.parseInt(id_autor));
             if (a.eliminarAutor()) {
                 respuesta += "\"" + proceso + "\": true";
@@ -63,12 +64,12 @@
             }
 
         } else if (proceso.equals("listar")) {
-        //Solicitud de parámetros enviados desde el frontned
+            //Solicitud de parámetros enviados desde el frontned
             //, uso de request.getParameter("nombre parametro")
-           //creación de objeto y llamado al metodo listar
+            //creación de objeto y llamado al metodo listar
             try {
-                Autor a= new Autor();
-                List<Autor> lista =a.listarAutores();
+                Autor a = new Autor();
+                List<Autor> lista = a.listarAutores();
                 respuesta += "\"" + proceso + "\": true,\"Autores\":" + new Gson().toJson(lista);
             } catch (Exception ex) {
                 respuesta += "\"" + proceso + "\": true,\"Autores\":[]";
@@ -76,16 +77,21 @@
             }
         } else if (proceso.equals("actualizar")) {
             //creación de objeto y llamado al metodo actualizar
-            String id_autor=request.getParameter("id_autor"); 
-            String nombre=request.getParameter("nombre");
-            String alias=request.getParameter("alias");
-            String nacionalidad=request.getParameter("nacionalidad");
+            String id_autor = request.getParameter("id_autor");
+            String nombre = request.getParameter("nombre");
+            String alias = request.getParameter("alias");
+            String nacionalidad = request.getParameter("nacionalidad");
             Autor a = new Autor(Integer.parseInt(id_autor), nombre, alias, nacionalidad);
-            if (a.actualizarAutor()) {                     
+            if (a.actualizarAutor()) {
                 respuesta += "\"" + proceso + "\": true";
             } else {
                 respuesta += "\"" + proceso + "\": false";
             }
+        } else if (proceso.equals("buscar")) {
+            String nombre = request.getParameter("nombre");
+            Autor a = new Autor(nombre);
+            a.searchAutor();
+            respuesta += "\"" + proceso + "\": true,\"Autor\":" + new Gson().toJson(a);
         }
 
         // ------------------------------------------------------------------------------------- //
@@ -97,7 +103,7 @@
         respuesta += "\"error\": \"INVALID\",";
         respuesta += "\"errorMsg\": \"Lo sentimos, los datos que ha enviado,"
                 + " son inválidos. Corrijalos y vuelva a intentar por favor.\"";
-    }    
+    }
     // Responder como objeto JSON codificación ISO 8859-1.
     respuesta += "}";
     response.setContentType("application/json;charset=iso-8859-1");
