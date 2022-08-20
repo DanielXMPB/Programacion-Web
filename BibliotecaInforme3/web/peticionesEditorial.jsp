@@ -41,7 +41,7 @@
         } else if (proceso.equals("eliminar")) {
             String id_editorial=request.getParameter("id_editorial");        
             Editorial e = new Editorial(Integer.parseInt(id_editorial));
-            if (e.eliminarEditorial()) {
+            if (e.elimnarEditorial()) {
                 respuesta += "\"" + proceso + "\": ture";
             } else {
                 respuesta += "\"" + proceso + "\": false";
@@ -64,6 +64,16 @@
                 respuesta += "\"" + proceso + "\": true,\"Editoriales\":" + new Gson().toJson(lista);
             } catch (Exception ex) {
                 respuesta += "\"" + proceso + "\": true,\"Editoriales\":[]";
+                Logger.getLogger(Editorial.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else if (proceso.equals("listarporid")) {
+            String id_editorial = request.getParameter("id_editorial");
+            Editorial e =null;
+            try {
+                 e = new Editorial(Integer.parseInt(id_editorial)).getEditorial();
+                respuesta += "\"" + proceso + "\": true,\"Libro\":" + new Gson().toJson(e);
+            } catch (Exception ex) {
+                respuesta += "\"" + proceso + "\": false,\"Libro\":"+new Gson().toJson(e);
                 Logger.getLogger(Editorial.class.getName()).log(Level.SEVERE, null, ex);
             }
         }

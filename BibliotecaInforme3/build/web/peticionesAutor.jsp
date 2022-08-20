@@ -22,7 +22,8 @@
         "eliminar",
         "actualizar",
         "listar",
-        "buscar"
+        "buscar",
+        "listarporid"
     });
 
     String proceso = "" + request.getParameter("proceso");
@@ -92,6 +93,16 @@
             Autor a = new Autor(nombre);
             a.searchAutor();
             respuesta += "\"" + proceso + "\": true,\"Autor\":" + new Gson().toJson(a);
+        } else if (proceso.equals("listarporid")) {
+            String id_autor = request.getParameter("id_autor");
+            Autor a =null;
+            try {
+                 a = new Autor(id_autor).getAutor();
+                respuesta += "\"" + proceso + "\": true,\"Libro\":" + new Gson().toJson(a);
+            } catch (Exception ex) {
+                respuesta += "\"" + proceso + "\": false,\"Libro\":"+new Gson().toJson(a);
+                Logger.getLogger(Autor.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
 
         // ------------------------------------------------------------------------------------- //
