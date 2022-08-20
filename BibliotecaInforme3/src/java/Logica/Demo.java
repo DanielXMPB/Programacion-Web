@@ -19,7 +19,7 @@ public class Demo {
         //Prueba para agregar una categoria
         //Categoria c = new Categoria(2,"terror","Da miedo");
         //c.actualizarCategoria();
-        Libro l = new Libro("ISBN 970-686-487-2","La",1,1,1,"2006",736,"");
-        l.actualizarLibro();
+        //Libro l = new Libro("ISBN 970-686-487-2","La",1,1,1,"2006",736,"");
+        //l.actualizarLibro();
     }
 }

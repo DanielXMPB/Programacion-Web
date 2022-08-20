@@ -139,18 +139,16 @@ public class Editorial implements InterfaceEditorial{
     
     @Override
     public Editorial getEditorial() {
-        String sql = "SELECT * FROM editorial WHERE codigo="+this.id_editorial+";";
+        String sql = "SELECT * FROM editorial WHERE id_editorial="+this.id_editorial+";";
         ConexionBD conexion = new ConexionBD();
         
-        ResultSet rs = conexion.consultarBD(sql);
-        
         try {
+            ResultSet rs = conexion.consultarBD(sql);
             if (rs.next()) {
-                this.id_editorial=rs.getInt(id_editorial);
+                this.id_editorial=rs.getInt("id_editorial");
                 this.nombre=rs.getString("nombre");
             }
         } catch (SQLException ex) {
-            Logger.getLogger(Editorial.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             conexion.cerrarConexion();
         }

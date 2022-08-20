@@ -11,7 +11,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
-        <title>Autores</title>
+        <title>Editoriales</title>
         <style>
             div{
                 padding: 4px;
@@ -166,19 +166,19 @@
                 b1.editar = function (id) {
                     var parametros = {
                         proceso: 'listarporid',
-                        isbn: id
+                        id_editorial: id
                     };
                     $http({
                         method: 'POST',
                         url: 'peticionesEditorial.jsp',
                         params: parametros
                     }).then(function (res) {
-                        b1.id_editorial = res.data.Editorial.id_editorial;
+                        b1.id_editorial = res.data.Editorial.id_editorial.toString();
                         b1.nombre = res.data.Editorial.nombre;
                     });
                 };
-            }
-            ;
+                window.onload = b1.listar;
+            };
         </script>
     </body>
 </html>

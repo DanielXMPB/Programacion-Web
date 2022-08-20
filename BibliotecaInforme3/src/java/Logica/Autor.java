@@ -173,13 +173,11 @@ public class Autor implements InterfaceAutor{
     
     @Override
     public Autor getAutor() {
-        String sql = "SELECT * FROM autor WHERE codigo="+this.id_autor+";";
+        String sql = "SELECT * FROM autor WHERE id_autor="+this.id_autor+";";
         ConexionBD conexion = new ConexionBD();
         
-        ResultSet rs = conexion.consultarBD(sql);
-        
         try {
-            Autor a;
+            ResultSet rs = conexion.consultarBD(sql);
             if (rs.next()) {
                 this.id_autor=rs.getInt("id_autor");
                 this.nombre=rs.getString("nombre");
@@ -187,7 +185,6 @@ public class Autor implements InterfaceAutor{
                 this.nacionalidad=rs.getString("nacionalidad");
             }
         } catch (SQLException ex) {
-            Logger.getLogger(Autor.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             conexion.cerrarConexion();
         }

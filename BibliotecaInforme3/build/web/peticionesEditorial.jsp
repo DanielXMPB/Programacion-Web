@@ -20,7 +20,8 @@
         "guardar",
         "eliminar",
         "actualizar",
-        "listar"	
+        "listar",
+        "listarporid"
     });
 
     String proceso = "" + request.getParameter("proceso");
@@ -68,12 +69,12 @@
             }
         } else if (proceso.equals("listarporid")) {
             String id_editorial = request.getParameter("id_editorial");
-            Editorial e =null;
+            Editorial e = null;
             try {
                  e = new Editorial(Integer.parseInt(id_editorial)).getEditorial();
-                respuesta += "\"" + proceso + "\": true,\"Libro\":" + new Gson().toJson(e);
+                respuesta += "\"" + proceso + "\": true,\"Editorial\":" + new Gson().toJson(e);
             } catch (Exception ex) {
-                respuesta += "\"" + proceso + "\": false,\"Libro\":"+new Gson().toJson(e);
+                respuesta += "\"" + proceso + "\": false,\"Editorial\":"+new Gson().toJson(e);
                 Logger.getLogger(Editorial.class.getName()).log(Level.SEVERE, null, ex);
             }
         }

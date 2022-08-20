@@ -194,7 +194,7 @@
                 b1.editar=function(id){
                     var parametros={
                         proceso:'listarporid',
-                        isbn:id
+                        id_autor:id
                     };
                     $http({
                         method:'POST',
@@ -207,6 +207,7 @@
                         b1.nacionalidad=res.data.Autor.nacionalidad;
                     });
                 };
+                window.onload = b1.listar;
             };
         </script>
     </body>
