@@ -1,7 +1,7 @@
 <%-- 
     Document   : peticionesCategoria
-    Created on : 29/07/2022, 10:33:27 p.†m.
-    Author     : usuario
+    Created on : 29/07/2022, 10:33:27 p.¬†m.
+    Author     : Eduar Ortiz
 --%>
 <%@page import="Logica.Categoria"%>
 <%@page import="java.util.logging.Logger"%>
@@ -77,9 +77,9 @@
         respuesta += "\"ok\": false,";
         respuesta += "\"error\": \"INVALID\",";
         respuesta += "\"errorMsg\": \"Lo sentimos, los datos que ha enviado,"
-                + " son inv·lidos. Corrijalos y vuelva a intentar por favor.\"";
+                + " son inv√°lidos. Corrijalos y vuelva a intentar por favor.\"";
     }
-    // Responder como objeto JSON codificaciÛn ISO 8859-1.
+    // Responder como objeto JSON codificaci√≥n ISO 8859-1.
     respuesta += "}";
     response.setContentType("application/json;charset=iso-8859-1");
     out.print(respuesta);
