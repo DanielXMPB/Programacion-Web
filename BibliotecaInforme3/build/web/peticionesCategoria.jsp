@@ -21,7 +21,8 @@
         "guardar",
         "eliminar",
         "actualizar",
-        "listar"
+        "listar",
+        "listarporid"
     });
 
     String proceso = "" + request.getParameter("proceso");
@@ -72,6 +73,16 @@
                 Logger.getLogger(Categoria.class.getName()).log(Level.SEVERE, null, ex);
             }
 
+        } else if (proceso.equals("listarporid")) {
+            String id_categoria = request.getParameter("id_categoria");
+            Categoria a = null;
+            try {
+                 a = new Categoria(Integer.parseInt(id_categoria)).getCategoria();
+                respuesta += "\"" + proceso + "\": true,\"Categoria\":" + new Gson().toJson(a);
+            } catch (Exception ex) {
+                respuesta += "\"" + proceso + "\": false,\"Categoria\":"+new Gson().toJson(a);
+                Logger.getLogger(Categoria.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     } else {
         respuesta += "\"ok\": false,";

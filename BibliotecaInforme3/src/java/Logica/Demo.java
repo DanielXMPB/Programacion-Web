@@ -10,7 +10,7 @@ public class Demo {
 
     public static void main(String[] args) {
         //Prueba de busqueda para la clase autor que se encuetre en la base de datos
-        //Autor a = new Autor("w");
+        //Autor a = new Autor("ISBN 970-686-487-2");
         //a.searchAutor();
         //System.out.print(a);
         //Prueba Agregar Editorial

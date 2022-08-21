@@ -154,21 +154,18 @@ public class Categoria implements InterfaceCategoria{
         return categorias;
     }
 
-    @Override
     public Categoria getCategoria() {
         String sql = "SELECT * FROM categoria WHERE id_categoria=" + this.id_categoria + ";";
         ConexionBD conexion = new ConexionBD();
 
-        ResultSet rs = conexion.consultarBD(sql);
-
         try {
-            if (rs.next()) {
+            ResultSet rs = conexion.consultarBD(sql);
+            if (rs.next()){
                 this.id_categoria = rs.getInt("id_categoria");
+                this.nombre = rs.getString("nombre");
                 this.descripcion = rs.getString("descripcion");
-                this.nombre = rs.getString(rs.getString("nombre"));
             }
         } catch (SQLException ex) {
-            Logger.getLogger(Categoria.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             conexion.cerrarConexion();
         }

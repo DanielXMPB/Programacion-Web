@@ -21,7 +21,8 @@
         "guardar",
         "eliminar",
         "actualizar",
-        "listar"
+        "listar",
+        "listarporid"
     });
 
     String proceso = "" + request.getParameter("proceso");
@@ -38,8 +39,8 @@
             int id_autor = Integer.parseInt(request.getParameter("id_autor"));
             int id_categoria = Integer.parseInt(request.getParameter("id_categoria"));
             int id_ediorial = Integer.parseInt(request.getParameter("id_editorial"));
-            String fechapublicacion = request.getParameter("fecha_de_publicacion");
-            int Paginas = Integer.parseInt(request.getParameter("paginas"));
+            String fechapublicacion = request.getParameter("fechapublicacion");
+            int Paginas = Integer.parseInt(request.getParameter("Paginas"));
             String descripcion = request.getParameter("descripcion");
 
             Libro lib = new Libro(isbn, nombre, id_autor, id_categoria, id_ediorial, fechapublicacion, Paginas, descripcion);
@@ -73,8 +74,8 @@
             int id_autor = Integer.parseInt(request.getParameter("id_autor"));
             int id_categoria = Integer.parseInt(request.getParameter("id_categoria"));
             int id_ediorial = Integer.parseInt(request.getParameter("id_editorial"));
-            String fechapublicacion = request.getParameter("fecha_de_publicacion");
-            int Paginas = Integer.parseInt(request.getParameter("paginas"));
+            String fechapublicacion = request.getParameter("fechapublicacion");
+            int Paginas = Integer.parseInt(request.getParameter("Paginas"));
             String descripcion = request.getParameter("descripcion");
 
             Libro lib = new Libro(isbn, nombre, id_autor, id_categoria, id_ediorial, fechapublicacion, Paginas, descripcion);
@@ -83,6 +84,16 @@
                 respuesta += "\"" + proceso + "\": true";
             } else {
                 respuesta += "\"" + proceso + "\": false";
+            }
+        } else if (proceso.equals("listarporid")) {
+            String isbn = request.getParameter("isbn");
+            Libro a = null;
+            try {
+                 a = new Libro(isbn).getLibro();
+                respuesta += "\"" + proceso + "\": true,\"Libro\":" + new Gson().toJson(a);
+            } catch (Exception ex) {
+                respuesta += "\"" + proceso + "\": false,\"Libro\":"+new Gson().toJson(a);
+                Logger.getLogger(Libro.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     } // ------------------------------------------------------------------------------------- //
