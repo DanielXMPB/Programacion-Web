@@ -26,7 +26,7 @@ public class ConexionBD {
         db = "tienda_de_ropa";
         url = "jdbc:mysql://" + host + "/" + db+"?serverTimezone=UTC"; 		//URL DB
         username = "root";                      			//usuario base de datos global 
-        password = "101002daniel";
+        password = "daniel101002";
         try {
             //Asignacin del Driver
             Class.forName(DB_driver);
