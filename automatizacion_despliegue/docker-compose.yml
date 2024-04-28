@@ -1,0 +1,53 @@
+services:
+  jenkins:
+    image: jenkins/jenkins
+    container_name: jenkins
+    ports:
+      - '8000:8080'
+    networks:
+      - test_network
+  proxy_manager:
+    image: 'jc21/nginx-proxy-manager:latest'
+    restart: unless-stopped
+    container_name: nginx-proxy-manager
+    ports:
+      - '80:80'
+      - '81:81'
+      - '443:443'
+    volumes:
+      - ./data:/data
+      - ./letsencrypt:/etc/letsencrypt
+    networks:
+      - coma_network
+  mysql:
+    image: mysql:latest
+    container_name: poseidon
+    ports:
+      - "3307:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: daniel101002
+    volumes:
+      - mysql:/var/lib/mysql
+      - ./db:/docker-entrypoint-initdb.d
+    networks:
+      - test_network
+    command: --default-authentication-plugin=mysql_native_password
+  tomcat:
+    depends_on:
+      - poseidon
+      - eim_diamante
+    image: tomcat:9.0.88
+    container_name: tomcat
+    ports:
+      - "9000:8080"
+    volumes:
+      - ./webapps/Proyecto_Final.war:/usr/local/tomcat/webapps/Proyecto_Final.war
+    networks:
+      - test_network
+volumes:
+  mysql:
+    external: false
+networks:
+  coma_network:
+    driver: bridge
+    name: test_network
